@@ -7,13 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#fa541c",
+        primary: "#f5222d",
       },
       width: {
         "with-navbar": "calc(100% - 192px)",
       },
       height: {
-        "without-header-24-rem": "calc(100vh - 96px)",
+        "without-header-6-rem": "calc(100vh - 96px)",
       },
       padding: {},
     },
