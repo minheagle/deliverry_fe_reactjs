@@ -7,14 +7,7 @@ const register = async (formRegister) => {
     });
     return response.results;
   } catch (error) {
-    const { data } = error.response;
-    const errors = data?.map((item) => {
-      return {
-        field: item.field,
-        message: item.defaultMessage,
-      };
-    });
-    throw errors;
+    throw error;
   }
 };
 

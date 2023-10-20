@@ -20,10 +20,18 @@ function* registerSaga(action) {
   try {
     const { data, callback } = action.payload;
     const response = yield call(authApi.register, data);
+    console.log(response);
     yield put(registerSuccess(response));
     yield callback.goToLogin();
   } catch (error) {
-    yield put(registerFailure(error.message));
+    if (
+      error.message &&
+      error.message !== "Request failed with status code 401"
+    ) {
+      yield put(registerFailure(error.message));
+    } else {
+      yield put(registerFailure("Register Fail !"));
+    }
   }
 }
 
