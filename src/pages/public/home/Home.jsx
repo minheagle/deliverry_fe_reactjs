@@ -49,7 +49,11 @@ const Home = () => {
 
   const handleRenderAllDistrict = () => {
     return districtData.map((item) => {
-      return (
+      return transportOrderHelper.countTransportOrderByDistrict(
+        item?.name,
+        data,
+        userData.id
+      ) !== 0 ? (
         <Link
           key={item?.id}
           to={generatePath(ROUTES.DELIVERY.DISTRICT, {
@@ -72,6 +76,23 @@ const Home = () => {
             </div>
           </div>
         </Link>
+      ) : (
+        <div className="w-full flex justify-center items-center">
+          <div className="group w-1/2 h-8 flex justify-center items-center border border-red-600 rounded-full hover:bg-red-600 hover:text-white px-1">
+            <div className="flex-1 w-full flex justify-start items-center pl-16">
+              <span className="font-medium">{item?.name}</span>
+            </div>
+            <div className="shrink-0 w-6 h-6 flex justify-center items-center bg-red-600 text-white rounded-full group-hover:bg-white group-hover:text-red-600 ">
+              <span>
+                {transportOrderHelper.countTransportOrderByDistrict(
+                  item?.name,
+                  data,
+                  userData.id
+                )}
+              </span>
+            </div>
+          </div>
+        </div>
       );
     });
   };
