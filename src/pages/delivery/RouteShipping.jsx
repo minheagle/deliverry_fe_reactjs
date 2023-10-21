@@ -31,7 +31,7 @@ const RouteShipping = () => {
     if (userData) {
       dispatch(getAllByDistrict());
     }
-  }, []);
+  }, [get_all_by_district?.data]);
 
   useEffect(() => {
     dispatch(
