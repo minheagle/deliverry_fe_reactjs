@@ -57,6 +57,12 @@ function* getRouteSaga(action) {
         waypointMarker: response.results.data2,
       })
     );
+
+    yield localStorage.setItem("routes", JSON.stringify(response.results.data));
+    yield localStorage.setItem(
+      "waypointMarker",
+      JSON.stringify(response.results.data2)
+    );
   } catch (error) {
     yield put(getRouteFailure(error.message));
   }

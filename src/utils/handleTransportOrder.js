@@ -70,11 +70,16 @@ const handleGetTotalPriceProducts = (data = []) => {
   return total;
 };
 
+const getAllAddress = (data = []) => {
+  return data.map((item) => item.deliveryAddress);
+};
+
 const transportOrderHelper = {
   countTransportOrderByDistrict,
   getAllByDistrict,
   handleGetTotalPriceProducts,
   convertShipAddress,
+  getAllAddress,
 };
 
 export default transportOrderHelper;

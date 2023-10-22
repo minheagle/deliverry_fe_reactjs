@@ -12,7 +12,11 @@ const ListOrder = () => {
     ? JSON.parse(localStorage.getItem("userData"))
     : null;
 
-  const { check_un_finish_shipping, change_status_shipping } = useSelector(
+  const shippingList = localStorage.getItem("shipping")
+    ? JSON.parse(localStorage.getItem("shipping"))
+    : [];
+
+  const { check_un_finish_shipping } = useSelector(
     (state) => state.TransportOrder
   );
 
@@ -21,7 +25,7 @@ const ListOrder = () => {
   }, []);
 
   const handleListTransportShipping = () => {
-    return check_un_finish_shipping?.data?.map((item, index) => {
+    return shippingList?.map((item, index) => {
       return <TransportItem key={item?.id} data={item} />;
     });
   };

@@ -10,7 +10,7 @@ import Register from "./pages/public/auth/Register";
 
 import Delivery from "./layouts/Delivery";
 import OrderByDistrict from "./pages/delivery/OrderByDistrict";
-import RouteShipping from "./pages/delivery/RouteShipping";
+import Shipping from "./pages/delivery/Shipping";
 
 import ROUTES from "./constants/ROUTES";
 import { getUser } from "./redux/slice/public/auth.slice";
@@ -36,7 +36,7 @@ const App = () => {
       </Route>
       <Route element={<Delivery />}>
         <Route path={ROUTES.DELIVERY.DISTRICT} element={<OrderByDistrict />} />
-        <Route path={ROUTES.DELIVERY.ROUTE} element={<RouteShipping />} />
+        <Route path={ROUTES.DELIVERY.ROUTE} element={<Shipping />} />
       </Route>
     </Routes>
   );
