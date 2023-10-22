@@ -7,6 +7,8 @@ import Public from "./layouts/Public";
 import Home from "./pages/public/home/Home";
 import Login from "./pages/public/auth/Login";
 import Register from "./pages/public/auth/Register";
+
+import Delivery from "./layouts/Delivery";
 import OrderByDistrict from "./pages/delivery/OrderByDistrict";
 import RouteShipping from "./pages/delivery/RouteShipping";
 
@@ -31,6 +33,8 @@ const App = () => {
         <Route path={ROUTES.PUBLIC.HOME} element={<Home />} />
         <Route path={ROUTES.PUBLIC.AUTH.LOGIN} element={<Login />} />
         <Route path={ROUTES.PUBLIC.AUTH.REGISTER} element={<Register />} />
+      </Route>
+      <Route element={<Delivery />}>
         <Route path={ROUTES.DELIVERY.DISTRICT} element={<OrderByDistrict />} />
         <Route path={ROUTES.DELIVERY.ROUTE} element={<RouteShipping />} />
       </Route>
