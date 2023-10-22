@@ -9,7 +9,7 @@ import {
 import transportOrderHelper from "../../../utils/handleTransportOrder";
 
 import ROUTES from "../../../constants/ROUTES";
-import notAuth from "../../../assets/log_in_image.png";
+import notAuth from "../../../assets/images/log_in_image.png";
 
 import Loading from "../../../components/common/Loading";
 

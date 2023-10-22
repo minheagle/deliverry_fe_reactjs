@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
-import { MFMap, MFMarker, MFDirectionsRenderer } from "react-map4d-map";
-
-import iconMarker from "../../assets/icon-maker-default.png";
+import { useState } from "react";
+import { MFMap, MFDirectionsRenderer } from "react-map4d-map";
 
 import MarkerCustom from "./MarkerCustom";
 

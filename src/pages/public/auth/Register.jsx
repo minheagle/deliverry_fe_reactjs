@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import registerValidatorSchema from "../../../validator/auth/register.validator";
 import { register } from "../../../redux/slice/public/auth.slice";
 
-import backgroundImage from "../../../assets/background-auth.jpg";
+import backgroundImage from "../../../assets/images/background-auth.jpg";
 import ROUTES from "../../../constants/ROUTES";
 
 const Register = () => {

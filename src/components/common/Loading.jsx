@@ -1,6 +1,6 @@
 import React from "react";
 
-import loadingGif from "../../assets/rotate-pulsating-loading-animation.gif";
+import loadingGif from "../../assets/images/rotate-pulsating-loading-animation.gif";
 
 const Loading = () => {
   return (

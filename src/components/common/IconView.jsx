@@ -1,6 +1,6 @@
 import React from "react";
 
-import iconMakerDefault from "../../assets/icon-maker-default-2.jpg";
+import iconMakerDefault from "../../assets/images/icon-maker-default-2.jpg";
 
 const IconView = () => {
   return (
