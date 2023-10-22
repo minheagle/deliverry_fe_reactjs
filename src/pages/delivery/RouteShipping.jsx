@@ -29,6 +29,10 @@ const RouteShipping = () => {
     ? JSON.parse(localStorage.getItem("userData"))
     : null;
 
+  const shipping = localStorage.getItem("shipping")
+    ? JSON.parse(localStorage.getItem("shipping"))
+    : null;
+
   useEffect(() => {
     if (userData) {
       dispatch(getAllByDistrict());
@@ -69,6 +73,14 @@ const RouteShipping = () => {
     inactiveOutlineWidth: 2,
     inactiveOutlineColor: "#FF00FF",
   };
+
+  if (!userData) {
+    return <Navigate to={ROUTES.PUBLIC.AUTH.LOGIN} />;
+  }
+
+  if (!shipping) {
+    return <Navigate to={ROUTES.PUBLIC.HOME} />;
+  }
 
   return get_route?.loading ? (
     <Loading />

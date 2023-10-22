@@ -70,6 +70,10 @@ function* checkUnFinishShippingSaga(action) {
       shipperId
     );
     yield put(checkUnFinishShippingSuccess(response.results.data));
+    yield localStorage.setItem(
+      "shipping",
+      JSON.stringify(response.results.data)
+    );
   } catch (error) {
     yield put(checkUnFinishShippingFailure(error.message));
   }
