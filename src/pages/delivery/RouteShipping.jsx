@@ -70,7 +70,9 @@ const RouteShipping = () => {
     inactiveOutlineColor: "#FF00FF",
   };
 
-  return (
+  return get_route?.loading ? (
+    <Loading />
+  ) : (
     <div className="w-full h-without-header-6-rem grid grid-cols-4">
       <div className="col-span-1 h-without-header-6-rem">
         <ListOrder />

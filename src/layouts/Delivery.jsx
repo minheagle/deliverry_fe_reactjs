@@ -1,9 +1,19 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
+
+import ROUTES from "../constants/ROUTES";
 
 import Header from "../components/common/Header";
 
 const Delivery = () => {
+  const userData = localStorage.getItem("userData")
+    ? JSON.parse(localStorage.getItem("userData"))
+    : null;
+
+  if (!userData) {
+    <Navigate to={ROUTES.PUBLIC.AUTH.LOGIN} />;
+  }
+
   return (
     <div className="relative w-full">
       <Header />
