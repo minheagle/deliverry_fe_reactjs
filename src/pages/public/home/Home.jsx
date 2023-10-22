@@ -11,13 +11,11 @@ import transportOrderHelper from "../../../utils/handleTransportOrder";
 import ROUTES from "../../../constants/ROUTES";
 import notAuth from "../../../assets/log_in_image.png";
 
+import Loading from "../../../components/common/Loading";
+
 const Home = () => {
   const dispatch = useDispatch();
-  const { data, loading } = useSelector(
-    (state) => state.TransportOrder.get_all_by_district
-  );
-
-  const { check_un_finish_shipping } = useSelector(
+  const { check_un_finish_shipping, get_all_by_district } = useSelector(
     (state) => state.TransportOrder
   );
 
@@ -51,7 +49,7 @@ const Home = () => {
     return districtData.map((item) => {
       return transportOrderHelper.countTransportOrderByDistrict(
         item?.name,
-        data,
+        get_all_by_district?.data,
         userData.id
       ) !== 0 ? (
         <Link
@@ -69,7 +67,7 @@ const Home = () => {
               <span>
                 {transportOrderHelper.countTransportOrderByDistrict(
                   item?.name,
-                  data,
+                  get_all_by_district?.data,
                   userData.id
                 )}
               </span>
@@ -77,7 +75,7 @@ const Home = () => {
           </div>
         </Link>
       ) : (
-        <div className="w-full flex justify-center items-center">
+        <div key={item?.id} className="w-full flex justify-center items-center">
           <div className="group w-1/2 h-8 flex justify-center items-center border border-red-600 rounded-full hover:bg-red-600 hover:text-white px-1">
             <div className="flex-1 w-full flex justify-start items-center pl-16">
               <span className="font-medium">{item?.name}</span>
@@ -86,7 +84,7 @@ const Home = () => {
               <span>
                 {transportOrderHelper.countTransportOrderByDistrict(
                   item?.name,
-                  data,
+                  get_all_by_district?.data,
                   userData.id
                 )}
               </span>
@@ -97,7 +95,13 @@ const Home = () => {
     });
   };
 
-  return (
+  return get_all_by_district?.loading || check_un_finish_shipping?.loading ? (
+    <div className="w-full grid grid-cols-12">
+      <div className="col-span-12 w-full">
+        <Loading />
+      </div>
+    </div>
+  ) : (
     <div className="w-full grid grid-cols-12">
       <div className="col-span-1"></div>
       {userData ? (

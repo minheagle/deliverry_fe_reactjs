@@ -18,7 +18,7 @@ const ListOrder = () => {
 
   useEffect(() => {
     dispatch(checkUnFinishShipping({ shipperId: userData.id }));
-  }, [change_status_shipping.loading]);
+  }, []);
 
   const handleListTransportShipping = () => {
     return check_un_finish_shipping?.data?.map((item, index) => {

@@ -13,8 +13,6 @@ const ModalDetailTransport = () => {
 
   const [openListProduct, setOpenListProduct] = useState(false);
 
-  console.log(data);
-
   const handleCloseModal = () => {
     dispatch(
       toggleModalTransportDetail({

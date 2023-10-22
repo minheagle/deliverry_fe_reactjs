@@ -5,11 +5,13 @@ import { Navigate } from "react-router-dom";
 import {
   getAllByDistrict,
   getRoute,
+  checkUnFinishShipping,
 } from "../../redux/slice/transport_order/transport.order.slice";
 import transportOrderHelper from "../../utils/handleTransportOrder";
 import ROUTES from "../../constants/ROUTES";
 
 import Map from "../../components/delivery/Map";
+import Loading from "../../components/common/Loading";
 import ListOrder from "./ListOrder";
 import ModalDetailTransport from "../../components/delivery/ModalDetailTransport";
 
@@ -30,19 +32,21 @@ const RouteShipping = () => {
   useEffect(() => {
     if (userData) {
       dispatch(getAllByDistrict());
+      dispatch(
+        checkUnFinishShipping({
+          shipperId: userData.id,
+        })
+      );
+      dispatch(
+        getRoute({
+          deliveryAddressList: transportOrderHelper.convertShipAddress(
+            get_all_by_district?.data,
+            userData.id
+          ),
+        })
+      );
     }
   }, []);
-
-  useEffect(() => {
-    dispatch(
-      getRoute({
-        deliveryAddressList: transportOrderHelper.convertShipAddress(
-          get_all_by_district?.data,
-          userData.id
-        ),
-      })
-    );
-  }, [get_all_by_district?.data]);
 
   const options = {
     routes: JSON.stringify(get_route?.data),
@@ -66,24 +70,18 @@ const RouteShipping = () => {
     inactiveOutlineColor: "#FF00FF",
   };
 
-  return check_un_finish_shipping.data.length === 0 ? (
-    <Navigate to={ROUTES.PUBLIC.HOME} />
-  ) : (
+  return (
     <div className="w-full h-without-header-6-rem grid grid-cols-4">
       <div className="col-span-1 h-without-header-6-rem">
         <ListOrder />
       </div>
       <div className="col-span-3 w-full h-max">
-        {get_route.loading ? (
-          <div>Loading</div>
-        ) : (
-          <Map
-            loading={get_route.loading}
-            data={get_route?.data}
-            options={options}
-            waypointMarkerOptions={waypoint_marker?.data}
-          />
-        )}
+        <Map
+          loading={get_route.loading}
+          data={get_route?.data}
+          options={options}
+          waypointMarkerOptions={waypoint_marker?.data}
+        />
       </div>
       <ModalDetailTransport />
     </div>

@@ -92,7 +92,7 @@ const transportOrderSlice = createSlice({
     },
     checkUnFinishShippingFailure: (state, action) => {
       state.check_un_finish_shipping.loading = false;
-      state.check_un_finish_shipping.data = null;
+      state.check_un_finish_shipping.data = [];
       state.check_un_finish_shipping.error = action.payload;
     },
     changeStatusShipping: (state) => {
