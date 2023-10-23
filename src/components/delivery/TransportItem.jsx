@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -5,8 +6,11 @@ import { changeStatusShipping } from "../../redux/slice/transport_order/transpor
 import { toggleModalTransportDetail } from "../../redux/slice/UI/transport.ui.slice";
 import transportOrderHelper from "../../utils/handleTransportOrder";
 
-const TransportItem = ({ data }) => {
+const TransportItem = ({ data, order }) => {
   const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
+  console.log(data);
   const { change_status_shipping } = useSelector(
     (state) => state.TransportOrder
   );
@@ -19,10 +23,11 @@ const TransportItem = ({ data }) => {
           currentStatus: value,
         },
         callback: {
-          reload: () => window.location.reload(),
+          success: () => setLoading(false),
         },
       })
     );
+    setLoading(true);
   };
 
   const handleOpenModal = () => {
@@ -34,14 +39,24 @@ const TransportItem = ({ data }) => {
     );
   };
 
-  return (
-    <div className="relative w-full flex flex-col justify-start items-center gap-4 border-2 border-red-600 p-4 rounded-lg">
+  return data?.status === "DELIVERING" ? (
+    <div className="relative w-full flex flex-col justify-start items-center gap-4 border-2 border-yellow-600 p-4 rounded-lg">
       <div className="absolute top-0 right-0">
         <button onClick={() => handleOpenModal()} className="px-2 py-1">
           <FontAwesomeIcon icon="fas fa-eye" className="text-red-600" />
         </button>
       </div>
       <div className="w-full flex flex-col justify-start items-center gap-2">
+        <div className="w-full">
+          <span className="font-medium">Status : </span>
+          <div className="px-2 py-1 bg-yellow-600 text-white rounded ">
+            Pending
+          </div>
+        </div>
+        <div className="w-full">
+          <span className="font-medium">Order : </span>
+          <span>{order !== null ? order + 1 : null}</span>
+        </div>
         <div className="w-full">
           <span className="font-medium">Recipient Name : </span>
           <span>{data?.recipientName}</span>
@@ -85,7 +100,7 @@ const TransportItem = ({ data }) => {
           </div>
         </div>
         <div className="col-span-1 w-full flex justify-center items-center">
-          {change_status_shipping?.loading ? (
+          {loading ? (
             <div role="status">
               <svg
                 aria-hidden="true"
@@ -108,6 +123,90 @@ const TransportItem = ({ data }) => {
           ) : (
             ""
           )}
+        </div>
+      </div>
+    </div>
+  ) : data?.status === "DELIVERED_SUCCESSFULLY" ? (
+    <div className="relative w-full flex flex-col justify-start items-center gap-4 border-2 border-blue-600 p-4 rounded-lg">
+      <div className="absolute top-0 right-0">
+        <button onClick={() => handleOpenModal()} className="px-2 py-1">
+          <FontAwesomeIcon icon="fas fa-eye" className="text-red-600" />
+        </button>
+      </div>
+      <div className="w-full flex flex-col justify-start items-center gap-2">
+        <div className="w-full">
+          <span className="font-medium">Status : </span>
+          <div className="px-2 py-1 bg-blue-600 text-white rounded ">
+            Success
+          </div>
+        </div>
+        <div className="w-full">
+          <span className="font-medium">Order : </span>
+          <span>{order !== null ? order + 1 : null}</span>
+        </div>
+        <div className="w-full">
+          <span className="font-medium">Recipient Name : </span>
+          <span>{data?.recipientName}</span>
+        </div>
+        <div className="w-full">
+          <span className="font-medium">Phone Number : </span>
+          <span>{data?.phoneNumber}</span>
+        </div>
+        <div className="w-full">
+          <span className="font-medium">Address : </span>
+          <span>{data?.deliveryAddress}</span>
+        </div>
+        <div className="w-full">
+          <span className="font-medium">Money : </span>
+          <span className="text-red-600">
+            {data?.paymentSt
+              ? "0 vnđ"
+              : transportOrderHelper
+                  .handleGetTotalPriceProducts(data?.itemTransportList)
+                  ?.toLocaleString() + " vnđ"}
+          </span>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div className="relative w-full flex flex-col justify-start items-center gap-4 border-2 border-red-600 p-4 rounded-lg">
+      <div className="absolute top-0 right-0">
+        <button onClick={() => handleOpenModal()} className="px-2 py-1">
+          <FontAwesomeIcon icon="fas fa-eye" className="text-red-600" />
+        </button>
+      </div>
+      <div className="w-full flex flex-col justify-start items-center gap-2">
+        <div className="w-full">
+          <span className="font-medium">Status : </span>
+          <div className="px-2 py-1 bg-red-600 text-white rounded ">
+            Failure
+          </div>
+        </div>
+        <div className="w-full">
+          <span className="font-medium">Order : </span>
+          <span>{order !== null ? order + 1 : null}</span>
+        </div>
+        <div className="w-full">
+          <span className="font-medium">Recipient Name : </span>
+          <span>{data?.recipientName}</span>
+        </div>
+        <div className="w-full">
+          <span className="font-medium">Phone Number : </span>
+          <span>{data?.phoneNumber}</span>
+        </div>
+        <div className="w-full">
+          <span className="font-medium">Address : </span>
+          <span>{data?.deliveryAddress}</span>
+        </div>
+        <div className="w-full">
+          <span className="font-medium">Money : </span>
+          <span className="text-red-600">
+            {data?.paymentSt
+              ? "0 vnđ"
+              : transportOrderHelper
+                  .handleGetTotalPriceProducts(data?.itemTransportList)
+                  ?.toLocaleString() + " vnđ"}
+          </span>
         </div>
       </div>
     </div>

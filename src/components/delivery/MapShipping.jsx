@@ -12,11 +12,11 @@ const MapShipping = () => {
   const { loading } = useSelector((state) => state.TransportOrder.get_route);
   const waypointMarker = localStorage.getItem("waypointMarker")
     ? JSON.parse(localStorage.getItem("waypointMarker"))
-    : null;
+    : [];
 
   const shipping = localStorage.getItem("shipping")
     ? JSON.parse(localStorage.getItem("shipping"))
-    : null;
+    : [];
 
   useEffect(() => {
     dispatch(

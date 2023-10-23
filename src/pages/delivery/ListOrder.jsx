@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { checkUnFinishShipping } from "../../redux/slice/transport_order/transport.order.slice";
+import {
+  checkUnFinishShipping,
+  changeListShipping,
+} from "../../redux/slice/transport_order/transport.order.slice";
 
 import TransportItem from "../../components/delivery/TransportItem";
 
@@ -16,17 +19,28 @@ const ListOrder = () => {
     ? JSON.parse(localStorage.getItem("shipping"))
     : [];
 
-  const { check_un_finish_shipping } = useSelector(
-    (state) => state.TransportOrder
-  );
+  const waypointOrder = localStorage.getItem("waypointOrder")
+    ? JSON.parse(localStorage.getItem("waypointOrder"))
+    : [];
+
+  const { listShipping } = useSelector((state) => state.TransportOrder);
 
   useEffect(() => {
-    dispatch(checkUnFinishShipping({ shipperId: userData.id }));
+    // dispatch(checkUnFinishShipping({ shipperId: userData.id }));
+    dispatch(changeListShipping(shippingList));
   }, []);
 
   const handleListTransportShipping = () => {
-    return shippingList?.map((item, index) => {
-      return <TransportItem key={item?.id} data={item} />;
+    const newList = waypointOrder?.map((item) => {
+      return listShipping?.data?.[item];
+    });
+
+    return newList?.map((item, index) => {
+      return (
+        <div key={index}>
+          <TransportItem data={item} order={index} />;
+        </div>
+      );
     });
   };
 

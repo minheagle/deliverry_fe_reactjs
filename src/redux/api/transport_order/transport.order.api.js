@@ -45,7 +45,10 @@ const changeStatusShipping = async (dInforId, changeStatusRequest) => {
   try {
     const response = await axios.patch(
       `/transport/shipping/${dInforId}/status`,
-      changeStatusRequest
+      changeStatusRequest,
+      {
+        timeout: 10 * 60 * 1000,
+      }
     );
     return response;
   } catch (error) {

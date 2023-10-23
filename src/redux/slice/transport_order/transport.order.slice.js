@@ -31,6 +31,9 @@ const initialState = {
     loading: false,
     error: "",
   },
+  listShipping: {
+    data: [],
+  },
 };
 
 const transportOrderSlice = createSlice({
@@ -108,6 +111,9 @@ const transportOrderSlice = createSlice({
       state.change_status_shipping.data = null;
       state.change_status_shipping.error = action.payload;
     },
+    changeListShipping: (state, action) => {
+      state.listShipping.data = action.payload;
+    },
   },
 });
 
@@ -127,6 +133,7 @@ export const {
   changeStatusShipping,
   changeStatusShippingSuccess,
   changeStatusShippingFailure,
+  changeListShipping,
 } = transportOrderSlice.actions;
 
 export default transportOrderSlice.reducer;
