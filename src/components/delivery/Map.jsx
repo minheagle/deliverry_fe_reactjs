@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { MFMap, MFDirectionsRenderer } from "react-map4d-map";
 
+import iconMarker from "../../assets/images/icon-maker-default.png";
+
 import MarkerCustom from "./MarkerCustom";
 
 const Map = ({ waypointMarkerOptions = [] }) => {
@@ -14,7 +16,7 @@ const Map = ({ waypointMarkerOptions = [] }) => {
     : null;
 
   const handleRenderMarker = () => {
-    return waypointMarkerOptions.map((item, index) => {
+    return waypointMarkerOptions?.map((item, index) => {
       return <MarkerCustom key={index} data={item} />;
     });
   };
@@ -25,14 +27,17 @@ const Map = ({ waypointMarkerOptions = [] }) => {
         lng: 108.21828,
         lat: 16.07445,
       },
-      title: "Start",
+      title: "92 Quang Trung",
+      // icon: null,
+      // iconView: `<img src=${iconMarker} style="width:27px;height:43px;">`,
     },
     destinationMarkerOptions: {
       position: {
         lng: 108.21828,
         lat: 16.07445,
       },
-      title: "End",
+      title: "92 Quang Trung",
+      // iconView: `<img src=${iconMarker} style="width:27px;height:43px;">`,
       userInteractionEnabled: false,
     },
     activeOutlineWidth: 2,

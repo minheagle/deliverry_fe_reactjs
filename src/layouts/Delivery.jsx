@@ -11,7 +11,7 @@ const Delivery = () => {
     : null;
 
   if (!userData) {
-    <Navigate to={ROUTES.PUBLIC.AUTH.LOGIN} />;
+    return <Navigate to={ROUTES.PUBLIC.AUTH.LOGIN} />;
   }
 
   return (

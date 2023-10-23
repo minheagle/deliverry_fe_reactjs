@@ -18,7 +18,7 @@ const MarkerCustom = ({ data }) => {
     <MFMarker
       position={data?.position}
       title={title}
-      iconView={`<img src=${iconMarker} style="width:27px;height:43px;">`}
+      // iconView={`<img src=${iconMarker} style="width:27px;height:43px;">`}
       onClick={() => handleOnClick()}
     />
   );
