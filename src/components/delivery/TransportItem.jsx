@@ -10,12 +10,9 @@ const TransportItem = ({ data, order }) => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
-  console.log(data);
-  const { change_status_shipping } = useSelector(
-    (state) => state.TransportOrder
-  );
 
   const handleChangeStatus = (value) => {
+    setLoading(true);
     dispatch(
       changeStatusShipping({
         dInforId: data?.id,
@@ -27,7 +24,6 @@ const TransportItem = ({ data, order }) => {
         },
       })
     );
-    setLoading(true);
   };
 
   const handleOpenModal = () => {

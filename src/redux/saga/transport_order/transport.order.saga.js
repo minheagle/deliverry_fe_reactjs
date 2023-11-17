@@ -105,11 +105,11 @@ function* checkUnFinishShippingSaga(action) {
 function* changeStatusShippingSaga(action) {
   const { dInforId, changeStatusRequest, callback } = action.payload;
   try {
-    // const response = yield call(
-    //   transportOrderApi.changeStatusShipping,
-    //   dInforId,
-    //   changeStatusRequest
-    // );
+    const response = yield call(
+      transportOrderApi.changeStatusShipping,
+      dInforId,
+      changeStatusRequest
+    );
     const listShipping = localStorage.getItem("shipping")
       ? JSON.parse(localStorage.getItem("shipping"))
       : [];
