@@ -9,6 +9,8 @@ import transportOrderHelper from "../../utils/handleTransportOrder";
 const TransportItem = ({ data, order }) => {
   const dispatch = useDispatch();
 
+  console.log(data);
+
   const [loading, setLoading] = useState(false);
 
   const handleChangeStatus = (value) => {

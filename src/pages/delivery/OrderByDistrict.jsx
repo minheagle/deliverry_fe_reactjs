@@ -33,6 +33,7 @@ const OrderByDistrict = () => {
 
   const handleRenderTransportOrderItemList = () => {
     const list = transportOrderHelper.getAllByDistrict(districtName, data);
+    console.log(list);
     return list?.map((item) => {
       return <TransportOrderItem key={item?.id} data={item} />;
     });
