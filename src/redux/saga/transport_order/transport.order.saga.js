@@ -92,10 +92,10 @@ function* checkUnFinishShippingSaga(action) {
       transportOrderApi.checkUnFinishShipping,
       shipperId
     );
-    yield put(checkUnFinishShippingSuccess(response.results.data));
+    yield put(checkUnFinishShippingSuccess(response?.results?.data));
     yield localStorage.setItem(
       "shipping",
-      JSON.stringify(response.results.data)
+      JSON.stringify(response?.results?.data)
     );
   } catch (error) {
     yield put(checkUnFinishShippingFailure(error.message));
