@@ -53,7 +53,7 @@ const Map = ({ waypointMarkerOptions = [] }) => {
           zoom: 15,
         }}
         version={"2.4"}
-        accessKey={"3f88d9d7e515a6249a9c43ad04cd5c10"}
+        accessKey={"129c7fdf9b5ec4046150e573fb15c39b"}
       >
         {handleRenderMarker()}
         <MFDirectionsRenderer
